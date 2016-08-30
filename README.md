@@ -74,6 +74,7 @@ public class ExampleTest {
 
         assertEquals(jsonContent, client.lastRequestBody());
     }
+    
 }
 ```
 
