@@ -1,7 +1,26 @@
-group 'com.github.michaelruocco'
-version '1.0.0'
-
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
+    }
+}
+
+project.ext {
+    artifactId = "http-client"
+    group = 'com.github.michaelruocco'
+    version = '1.0.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -9,9 +28,91 @@ repositories {
 
 dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.5.2'
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    compile 'log4j:log4j:1.2.17'
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'junit:junit:4.11'
     testCompile 'org.assertj:assertj-core:3.5.2'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(uploadArchives)) {
+        signing {
+            required true
+            sign configurations.archives
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                packaging 'jar'
+                name 'Http Client'
+                description 'Code library to enable easy interaction with restful json apis'
+                groupId project.ext.group
+                if (project.hasProperty('standalone')) {
+                    artifactId standaloneArtifactId
+                } else {
+                    artifactId project.ext.artifactId
+                }
+                version project.ext.version
+                url 'https://github.com/michaelruocco/http-client'
+
+                developers {
+                    developer {
+                        id 'mruoc'
+                        name 'Michael Ruocco'
+                        email 'michael.ruocco@hotmail.com'
+                    }
+                }
+
+                scm {
+                    connection 'scm:git:git@github.com/michaelruocco/http-client.git'
+                    developerConnection 'scm:git:git@github.com/michaelruocco/http-client.git'
+                    url 'git@github.com/michaelruocco/http-client.git'
+                }
+
+                licenses {
+                    license {
+                        name 'BSD License'
+                        url 'http://www.opensource.org/licenses/bsd-license.php'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }
+    }
 }
