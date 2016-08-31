@@ -16,20 +16,21 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FakeApacheHttpClient implements HttpClient {
 
+    private final RequestConverter converter = new RequestConverter();
+    private final List<Request> requests = new ArrayList<>();
+
     private HttpResponse response;
-    private List<Request> requests = new ArrayList<>();
     private boolean throwIo;
 
     @Override
     public HttpResponse execute(HttpUriRequest rawRequest) throws IOException {
-        requests.add(Request.fromApacheRequest(rawRequest));
+        requests.add(converter.toRequest(rawRequest));
         if (throwIo)
             throw new IOException();
         return response;
