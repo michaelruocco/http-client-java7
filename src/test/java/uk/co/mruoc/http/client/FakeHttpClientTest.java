@@ -45,16 +45,18 @@ public class FakeHttpClientTest {
         assertThat(client.lastRequestBody()).isEqualTo("body");
     }
 
-    @Test(expected = MissingBodyException.class)
-    public void accessingGetBodyThrowsException() {
+    @Test
+    public void accessingGetBodyReturnsEmptyString() {
         client.get(ENDPOINT);
-        client.lastRequestBody();
+
+        assertThat(client.lastRequestBody()).isEmpty();
     }
 
-    @Test(expected = MissingBodyException.class)
-    public void accessingDeleteBodyThrowsException() {
+    @Test
+    public void accessingDeleteBodyReturnsEmptyString() {
         client.delete(ENDPOINT);
-        client.lastRequestBody();
+
+        assertThat(client.lastRequestBody()).isEmpty();
     }
 
     @Test

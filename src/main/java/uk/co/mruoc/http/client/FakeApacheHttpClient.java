@@ -29,7 +29,7 @@ public class FakeApacheHttpClient implements HttpClient {
 
     @Override
     public HttpResponse execute(HttpUriRequest rawRequest) throws IOException {
-        requests.add(new Request(rawRequest));
+        requests.add(Request.fromApacheRequest(rawRequest));
         if (throwIo)
             throw new IOException();
         return response;
