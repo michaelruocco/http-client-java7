@@ -1,6 +1,6 @@
 package uk.co.mruoc.http.client;
 
-public class BaseHttpClient implements HttpClient {
+public abstract class BaseHttpClient implements HttpClient {
     
     @Override
     public Response post(String endpoint, String entity) {
@@ -8,9 +8,7 @@ public class BaseHttpClient implements HttpClient {
     }
 
     @Override
-    public Response post(String endpoint, String entity, Headers headers) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract Response post(String endpoint, String entity, Headers headers);
 
     @Override
     public Response put(String endpoint, String entity) {
@@ -18,9 +16,7 @@ public class BaseHttpClient implements HttpClient {
     }
 
     @Override
-    public Response put(String endpoint, String entity, Headers headers) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract Response put(String endpoint, String entity, Headers headers);
 
     @Override
     public Response get(String endpoint) {
@@ -28,9 +24,7 @@ public class BaseHttpClient implements HttpClient {
     }
 
     @Override
-    public Response get(String endpoint, Headers headers) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract Response get(String endpoint, Headers headers);
 
     @Override
     public Response delete(String endpoint) {
@@ -38,8 +32,6 @@ public class BaseHttpClient implements HttpClient {
     }
 
     @Override
-    public Response delete(String endpoint, Headers headers) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract Response delete(String endpoint, Headers headers);
     
 }
