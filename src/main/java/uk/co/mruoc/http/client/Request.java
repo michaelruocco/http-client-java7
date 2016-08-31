@@ -17,11 +17,11 @@ public class Request {
     private final String body;
     private final Headers headers;
 
-    public Request(String uri, Method method, String body, Headers headers) {
-        this.uri = uri;
-        this.method = method;
-        this.body = body;
-        this.headers = headers;
+    private Request(RequestBuilder builder) {
+        this.uri = builder.uri;
+        this.method = builder.method;
+        this.body = builder.body;
+        this.headers = builder.headers;
     }
 
     public Method getMethod() {
@@ -40,12 +40,47 @@ public class Request {
         return uri;
     }
 
-    public static Request fromApacheRequest(HttpRequest request) throws IOException {
-        String uri = request.getRequestLine().getUri();
+    public static class RequestBuilder {
+
+        private String uri;
+        private Method method;
+        private String body;
+        private Headers headers;
+
+        public RequestBuilder setUri(String uri) {
+            this.uri = uri;
+            return this;
+        }
+
+        public RequestBuilder setMethod(Method method) {
+            this.method = method;
+            return this;
+        }
+
+        public RequestBuilder setBody(String body) {
+            this.body = body;
+            return this;
+        }
+
+        public RequestBuilder setHeaders(Headers headers) {
+            this.headers = headers;
+            return this;
+        }
+
+        public Request build() {
+            return new Request(this);
+        }
+
+    }
+
+    public static Request fromApacheRequest(HttpRequest request) {
         Method method = Method.valueOf(request.getRequestLine().getMethod());
-        String body = readEntity(method, request);
-        Headers headers = new Headers(request);
-        return new Request(uri, method, body, headers);
+        return new RequestBuilder()
+                .setUri(request.getRequestLine().getUri())
+                .setMethod(method)
+                .setBody(readEntity(method, request))
+                .setHeaders(new Headers(request))
+                .build();
     }
 
     private static String readEntity(Method method, HttpRequest request) {
