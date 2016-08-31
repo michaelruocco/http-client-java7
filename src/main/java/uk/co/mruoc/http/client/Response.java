@@ -11,18 +11,10 @@ public class Response {
     private final String body;
     private final Headers headers;
 
-    public Response(int statusCode) {
-        this(statusCode, "", new Headers());
-    }
-
-    public Response(int statusCode, String body) {
-        this(statusCode, body, new Headers());
-    }
-
-    public Response(int statusCode, String body, Headers headers) {
-        this.statusCode = statusCode;
-        this.body = body;
-        this.headers = headers;
+    private Response(ResponseBuilder builder) {
+        this.statusCode = builder.statusCode;
+        this.body = builder.body;
+        this.headers = builder.headers;
     }
 
     public String getBody() {
@@ -37,11 +29,39 @@ public class Response {
         return headers.get(key);
     }
 
+    public static class ResponseBuilder {
+
+        private int statusCode;
+        private String body;
+        private Headers headers;
+
+        public ResponseBuilder setStatusCode(int statusCode) {
+            this.statusCode = statusCode;
+            return this;
+        }
+
+        public ResponseBuilder setBody(String body) {
+            this.body = body;
+            return this;
+        }
+
+        public ResponseBuilder setHeaders(Headers headers) {
+            this.headers = headers;
+            return this;
+        }
+
+        public Response build() {
+            return new Response(this);
+        }
+
+    }
+
     public static Response fromApacheResponse(HttpResponse response) throws IOException {
-        int statusCode = response.getStatusLine().getStatusCode();
-        String body = extractBody(response);
-        Headers headers = extractHeaders(response);
-        return new Response(statusCode, body, headers);
+        return new ResponseBuilder()
+                .setStatusCode(response.getStatusLine().getStatusCode())
+                .setBody(extractBody(response))
+                .setHeaders(extractHeaders(response))
+                .build();
     }
 
     private static String extractBody(HttpResponse response) throws IOException {
