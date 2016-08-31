@@ -1,10 +1,5 @@
 package uk.co.mruoc.http.client;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-
 public class Response {
 
     private final int statusCode;
@@ -54,28 +49,6 @@ public class Response {
             return new Response(this);
         }
 
-    }
-
-    public static Response fromApacheResponse(HttpResponse response) throws IOException {
-        return new ResponseBuilder()
-                .setStatusCode(extractStatusCode(response))
-                .setBody(extractBody(response))
-                .setHeaders(extractHeaders(response))
-                .build();
-    }
-
-    private static int extractStatusCode(HttpResponse response) {
-        return response.getStatusLine().getStatusCode();
-    }
-
-    private static String extractBody(HttpResponse response) throws IOException {
-        if (response.getEntity() == null)
-            return "";
-        return EntityUtils.toString(response.getEntity());
-    }
-
-    private static Headers extractHeaders(HttpResponse response) {
-        return new Headers(response);
     }
 
 }

@@ -2,6 +2,7 @@ package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
@@ -18,6 +19,7 @@ public class SimpleHttpClient extends BaseHttpClient {
 
     private static final Logger LOG = Logger.getLogger(SimpleHttpClient.class);
 
+    private final ResponseConverter converter = new ResponseConverter();
     private final HttpClient client;
 
     public SimpleHttpClient() {
@@ -55,7 +57,8 @@ public class SimpleHttpClient extends BaseHttpClient {
     protected Response execute(HttpRequestBase request) {
         try {
             LOG.info("performing " + request.getMethod() + " on uri " + request.getURI().toString());
-            return Response.fromApacheResponse(client.execute(request));
+            HttpResponse rawResponse = client.execute(request);
+            return converter.toResponse(rawResponse);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         } finally {
