@@ -74,25 +74,36 @@ public class Request {
     }
 
     public static Request fromApacheRequest(HttpRequest request) {
-        Method method = Method.valueOf(request.getRequestLine().getMethod());
         return new RequestBuilder()
-                .setUri(request.getRequestLine().getUri())
-                .setMethod(method)
-                .setBody(readEntity(method, request))
-                .setHeaders(new Headers(request))
+                .setUri(extractUri(request))
+                .setMethod(extractMethod(request))
+                .setBody(extractBody(request))
+                .setHeaders(extractHeaders(request))
                 .build();
     }
 
-    private static String readEntity(Method method, HttpRequest request) {
+    private static String extractUri(HttpRequest request) {
+        return request.getRequestLine().getUri();
+    }
+
+    private static Method extractMethod(HttpRequest request) {
+        return Method.valueOf(request.getRequestLine().getMethod());
+    }
+
+    private static String extractBody(HttpRequest request) {
         try {
             HttpEntityEnclosingRequest entityRequest = (HttpEntityEnclosingRequest) request;
             return EntityUtils.toString(entityRequest.getEntity());
         } catch (ClassCastException e) {
-            LOG.info(method + " request does not have a body available", e);
+            LOG.info("request does not have a body available", e);
             return "";
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    private static Headers extractHeaders(HttpRequest request) {
+        return new Headers(request);
     }
 
 }

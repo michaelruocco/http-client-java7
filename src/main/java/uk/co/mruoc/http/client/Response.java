@@ -58,10 +58,14 @@ public class Response {
 
     public static Response fromApacheResponse(HttpResponse response) throws IOException {
         return new ResponseBuilder()
-                .setStatusCode(response.getStatusLine().getStatusCode())
+                .setStatusCode(extractStatusCode(response))
                 .setBody(extractBody(response))
                 .setHeaders(extractHeaders(response))
                 .build();
+    }
+
+    private static int extractStatusCode(HttpResponse response) {
+        return response.getStatusLine().getStatusCode();
     }
 
     private static String extractBody(HttpResponse response) throws IOException {
