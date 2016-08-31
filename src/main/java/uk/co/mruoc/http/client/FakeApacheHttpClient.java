@@ -1,4 +1,4 @@
-package uk.co.mruoc.http.client.test;
+package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
@@ -14,7 +14,6 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
-import uk.co.mruoc.http.client.Headers;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -57,11 +56,7 @@ public class FakeApacheHttpClient implements HttpClient {
     }
 
     public String lastRequestBody() {
-        try {
-            return lastRequest().getBody();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return lastRequest().getBody();
     }
 
     public Method lastRequestMethod() {

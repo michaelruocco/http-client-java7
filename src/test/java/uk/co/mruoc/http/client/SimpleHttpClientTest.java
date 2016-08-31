@@ -2,7 +2,6 @@ package uk.co.mruoc.http.client;
 
 import org.junit.Before;
 import org.junit.Test;
-import uk.co.mruoc.http.client.test.FakeApacheHttpClient;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

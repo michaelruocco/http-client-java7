@@ -1,10 +1,8 @@
-package uk.co.mruoc.http.client.test;
+package uk.co.mruoc.http.client;
 
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
 import org.apache.http.util.EntityUtils;
-import uk.co.mruoc.http.client.Headers;
-import uk.co.mruoc.http.client.MissingBodyException;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -21,7 +19,7 @@ public class Request {
         return Method.valueOf(innerRequest.getRequestLine().getMethod());
     }
 
-    public String getBody() throws IOException {
+    public String getBody() {
         return readEntity();
     }
 

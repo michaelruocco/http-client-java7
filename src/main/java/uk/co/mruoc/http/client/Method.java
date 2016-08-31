@@ -1,4 +1,4 @@
-package uk.co.mruoc.http.client.test;
+package uk.co.mruoc.http.client;
 
 public enum Method {
 

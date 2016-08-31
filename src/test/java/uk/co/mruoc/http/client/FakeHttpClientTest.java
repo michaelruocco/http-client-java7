@@ -1,7 +1,8 @@
-package uk.co.mruoc.http.client.test;
+package uk.co.mruoc.http.client;
 
 import org.junit.Before;
 import org.junit.Test;
+import uk.co.mruoc.http.client.FakeHttpClient;
 import uk.co.mruoc.http.client.Headers;
 import uk.co.mruoc.http.client.MissingBodyException;
 
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static uk.co.mruoc.http.client.test.Method.*;
+import static uk.co.mruoc.http.client.Method.*;
 
 public class FakeHttpClientTest {
 
