@@ -1,9 +1,9 @@
 package uk.co.mruoc.http.client;
 
+import org.apache.http.Header;
 import org.apache.http.HttpMessage;
 import org.apache.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +19,12 @@ public class Headers {
     }
 
     public Headers(HttpMessage message) {
-        Arrays.stream(message.getAllHeaders()).forEach(h -> add(h.getName(), h.getValue()));
+        for (Header header : message.getAllHeaders())
+            add(header);
+    }
+
+    public void add(Header header) {
+        add(header.getName(), header.getValue());
     }
 
     public void add(String name, String value) {

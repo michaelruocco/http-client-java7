@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static uk.co.mruoc.http.client.Method.*;
@@ -114,14 +113,14 @@ public class FakeHttpClientTest {
         client.get("dummy-endpoint");
     }
 
-    @Test(expected = UncheckedIOException.class)
+    @Test(expected = HttpClientException.class)
     public void allowsSettingUpAnyRuntimeException() {
-        client.throwsException(new UncheckedIOException(new IOException()));
+        client.throwsException(new HttpClientException(new IOException()));
 
         client.get("dummy-endpoint");
     }
 
-    @Test(expected = UncheckedIOException.class)
+    @Test(expected = HttpClientException.class)
     public void allowsThrowingOfIoException() {
         client.throwsIoException();
 

@@ -19,8 +19,8 @@ project.ext {
     version = '2.0.0'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
@@ -31,7 +31,7 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.5.2'
+    testCompile 'org.assertj:assertj-core:2.6.0'
 }
 
 jacocoTestReport {

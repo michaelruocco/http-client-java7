@@ -6,7 +6,6 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 
 import static uk.co.mruoc.http.client.Request.*;
 
@@ -39,7 +38,7 @@ public class RequestConverter {
             LOG.info("apache request does not have a body available", e);
             return "";
         } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            throw new HttpClientException(e);
         }
     }
 

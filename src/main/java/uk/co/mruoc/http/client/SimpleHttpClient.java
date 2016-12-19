@@ -10,7 +10,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 
 import static org.apache.http.HttpHeaders.ACCEPT;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
@@ -60,7 +59,7 @@ public class SimpleHttpClient extends BaseHttpClient {
             HttpResponse rawResponse = client.execute(request);
             return converter.toResponse(rawResponse);
         } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            throw new HttpClientException(e);
         } finally {
             request.releaseConnection();
         }
