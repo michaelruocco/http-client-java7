@@ -1,12 +1,12 @@
-# Http Client
+# Http Client Java7
 
-[![Build Status](https://travis-ci.org/michaelruocco/http-client.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client)
-[![Coverage Status](https://coveralls.io/repos/github/michaelruocco/http-client/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/http-client?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/57c5b35069d9490042f72f0f/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57c5b35069d9490042f72f0f)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54ce00d4a4084dabba53f5e2c5ef9a01)](https://www.codacy.com/app/michael-ruocco/http-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/http-client&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/michaelruocco/http-client.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client-java7)
+[![Coverage Status](https://coveralls.io/repos/github/michaelruocco/http-client/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/http-client-java7?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client-java7)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54ce00d4a4084dabba53f5e2c5ef9a01)](https://www.codacy.com/app/michael-ruocco/http-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/http-client-java7&amp;utm_campaign=Badge_Grade)
 
-This project aims to provide a simpler interface for RESTful JSON api calls.
+This project is a copy of [http-client](https://github.com/michaelruocco/http-client) that works with java
+7. It aims to provide a simpler interface for RESTful JSON api calls.
 It also includes a fake implementation to make testing of client code easier.
 
 ## Usage
@@ -16,7 +16,7 @@ gradle you would do this by adding the following to your build.gradle file:
 
 ```
 dependencies {
-    classpath 'com.github.michaelruocco:http-client:2.0.0'
+    compile 'com.github.michaelruocco:http-client-java7:1.0.0'
 }
 ```
 
