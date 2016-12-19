@@ -80,16 +80,12 @@ uploadArchives {
 
             pom.project {
                 packaging 'jar'
-                name 'Http Client'
+                name 'Http Client Java7'
                 description 'Code library to enable easy interaction with restful json apis'
                 groupId project.ext.group
-                if (project.hasProperty('standalone')) {
-                    artifactId standaloneArtifactId
-                } else {
-                    artifactId project.ext.artifactId
-                }
+                artifactId project.ext.artifactId
                 version project.ext.version
-                url 'https://github.com/michaelruocco/http-client'
+                url 'https://github.com/michaelruocco/http-client-java7'
 
                 developers {
                     developer {
@@ -100,9 +96,9 @@ uploadArchives {
                 }
 
                 scm {
-                    connection 'scm:git:git@github.com/michaelruocco/http-client.git'
-                    developerConnection 'scm:git:git@github.com/michaelruocco/http-client.git'
-                    url 'git@github.com/michaelruocco/http-client.git'
+                    connection 'scm:git:git@github.com/michaelruocco/http-client-java7.git'
+                    developerConnection 'scm:git:git@github.com/michaelruocco/http-client-java7.git'
+                    url 'git@github.com/michaelruocco/http-client-java7.git'
                 }
 
                 licenses {
