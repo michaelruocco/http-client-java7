@@ -1,9 +1,9 @@
 # Http Client Java7
 
-[![Build Status](https://travis-ci.org/michaelruocco/http-client.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client-java7)
-[![Coverage Status](https://coveralls.io/repos/github/michaelruocco/http-client/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/http-client-java7?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client-java7)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54ce00d4a4084dabba53f5e2c5ef9a01)](https://www.codacy.com/app/michael-ruocco/http-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/http-client-java7&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/michaelruocco/http-client-java7.svg?branch=master)](https://travis-ci.org/michaelruocco/http-client-java7)
+[![Coverage Status](https://coveralls.io/repos/github/michaelruocco/http-client-java7/badge.svg?branch=master)](https://coveralls.io/github/michaelruocco/http-client-java7?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client-java7/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.michaelruocco/http-client-java7)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54ce00d4a4084dabba53f5e2c5ef9a01)](https://www.codacy.com/app/michael-ruocco/http-client-java7?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=michaelruocco/http-client-java7&amp;utm_campaign=Badge_Grade)
 
 This project is a copy of [http-client](https://github.com/michaelruocco/http-client) that works with java
 7. It aims to provide a simpler interface for RESTful JSON api calls.
@@ -86,4 +86,13 @@ You can run the tests for this project by running the following command:
 
 ```
 gradlew clean build
+```
+
+## Checking dependencies
+
+You can check the current dependencies used by the project to see whether
+or not they are currently up to date by running the following command:
+
+```
+gradlew dependencyUpdates
 ```

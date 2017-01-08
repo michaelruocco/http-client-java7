@@ -1,23 +1,14 @@
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.7.1'
+    id 'com.github.ben-manes.versions' version '0.13.0'
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
-    }
-}
-
-project.ext {
-    artifactId = "http-client-java7"
-    group = 'com.github.michaelruocco'
-    version = '1.0.0'
-}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -82,9 +73,9 @@ uploadArchives {
                 packaging 'jar'
                 name 'Http Client Java7'
                 description 'Code library to enable easy interaction with restful json apis'
-                groupId project.ext.group
-                artifactId project.ext.artifactId
-                version project.ext.version
+                group 'com.github.michaelruocco'
+                artifactId 'http-client-java7'
+                version '1.0.0'
                 url 'https://github.com/michaelruocco/http-client-java7'
 
                 developers {
