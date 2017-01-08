@@ -96,3 +96,4 @@ or not they are currently up to date by running the following command:
 ```
 gradlew dependencyUpdates
 ```
+
